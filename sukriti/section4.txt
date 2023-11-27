@@ -1,0 +1,113 @@
+1.Explain the concept of closures in JavaScript and provide a real-world example where closures would be beneficial in a coding scenario?
+Answer:In JavaScript, a closure is formed when a function is defined within another function, and the inner function has access to the outer function's variables, parameters, and even the outer function's scope, even after the outer function has finished execution. This is possible because the inner function "closes over" the outer function's scope, creating a closure.
+
+Consider a scenario where you are building a user authentication module. Closures can be used to create private functions and variables that are only accessible within the authentication module. This helps in encapsulating sensitive information and providing a clean and secure API for authentication without exposing internal implementation details.
+function createAuthenticationModule() {
+  let isLoggedIn = false;
+  let username = '';
+
+  function login(user, password) {
+    // Perform authentication logic
+    isLoggedIn = true;
+    username = user;
+    console.log(`User ${user} logged in.`);
+  }
+
+  function logout() {
+    // Perform logout logic
+    isLoggedIn = false;
+    username = '';
+    console.log('User logged out.');
+  }
+
+  function getUserInfo() {
+    // Return user information
+    return { isLoggedIn, username };
+  }
+
+  return {
+    login,
+    logout,
+    getUserInfo,
+  };
+}
+
+const authModule = createAuthenticationModule();
+authModule.login('james', 'password123');
+console.log(authModule.getUserInfo());authModule.logout();
+console.log(authModule.getUserInfo()); 
+
+
+2.How would you explain the event loop in JavaScript, and why is it crucial for managing asynchronous operations in the language?
+Answer :
+The event loop is a core mechanism in JavaScript that handles the execution of asynchronous code. In simpler terms, the event loop allows JavaScript to execute multiple tasks concurrently without blocking the main thread. This is important because JavaScript is single-threaded, which means it can only perform one task at a time. Without the event loop, tasks that take a long time to complete would block the execution of other tasks, causing the application to become unresponsive.
+The event loop is a simple concept, but it can be difficult to understand at first. Let's start with a basic example. Imagine you are cooking dinner, and you are waiting for water to boil. While the water is boiling, you can start chopping vegetables or preparing the meat. This is because you are not waiting for the water to boil to start these tasks; you are simply doing them while you wait.
+The event loop works in a similar way. When you run JavaScript code, the code is added to the event loop. The event loop then starts executing the code, one line at a time. If the code needs to perform an asynchronous operation, such as making a network request, the event loop will stop executing the code and start waiting for the operation to complete. Once the operation is complete, the event loop will start executing the code again.
+This process continues until all of the code in the event loop has been executed. The event loop is constantly checking for new events to handle, so it is able to respond to them quickly and efficiently. This makes JavaScript a very powerful language for developing asynchronous applications.
+
+
+3.Write a function that makes three asynchronous calls using Promises. Ensure they complete in order, regardless of their individual completion times. How would you handle errors in such a scenario?
+
+Answer:
+
+function makeAsyncApiCalls() {
+  return new Promise((resolve, reject) => {
+    let data1, data2, data3;
+
+    // First asynchronous API call
+    fetch('https://jsonplaceholder.typicode.com/posts/1')
+      .then((response1) => response1.json())
+      .then((result1) => {
+        console.log('First API call completed:', result1);
+        data1 = result1;
+
+        // Second asynchronous API call
+        return fetch('https://jsonplaceholder.typicode.com/posts/2');
+      })
+      .then((response2) => response2.json())
+      .then((result2) => {
+        console.log('Second API call completed:', result2);
+        data2 = result2;
+
+        // Third asynchronous API call
+        return fetch('https://jsonplaceholder.typicode.com/posts/3');
+      })
+      .then((response3) => response3.json())
+      .then((result3) => {
+        console.log('Third API call completed:', result3);
+        data3 = result3;
+
+        resolve([data1, data2, data3]);
+      })
+      .catch((error) => {
+        console.error('Error in one of the API calls:', error);
+        reject('One or more API calls failed.');
+      });
+  });
+}
+
+
+makeAsyncApiCalls()
+  .then((results) => {
+    console.log('All API calls completed successfully:', results);
+  })
+  .catch((errorMessage) => {
+    console.error(errorMessage);
+  });
+
+
+
+4.Implement a function using functional programming principles that checks if a given array of numbers contains only even numbers. How would you approach this problem without using traditional loops?
+
+Answer:
+
+function areAllEvenNumbers(arr) {
+  const evenNumbers = arr.filter((number) => number % 2 === 0);
+  return evenNumbers.length === arr.length;
+}
+
+const numbers1 = [2, 4, 6, 8, 10];
+console.log(areAllEvenNumbers(numbers1)); // Output: true
+
+const numbers2 = [1, 2, 3, 4, 5];
+console.log(areAllEvenNumbers(numbers2));// Output: false

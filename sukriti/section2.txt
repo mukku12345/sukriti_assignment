@@ -1,0 +1,33 @@
+
+1.What is the purpose of the cluster module in Node.js?
+Answer : The cluster module in Node.js is used to enable the creation of child processes (workers) that share the same server port. It allows for the distribution of incoming connections among multiple worker processes, leveraging the capabilities of multi-core systems. The primary purpose of the cluster module is to improve the performance and scalability of Node.js applications by taking advantage of parallel processing.
+
+2.What is “callback hell”? Is it possible to avoid callback hells and how?
+Answer:Callback hell also known as the "pyramid of doom," refers to a situation in asynchronous programming where multiple nested callback functions create code that is difficult to read, understand, and maintain. This often occurs when dealing with asynchronous operations in Node.js or in the browser, where callbacks are used to handle the completion of tasks like reading files, making API requests, or handling user interactions.
+
+Yes its possible to avoid callback hell --->
+1.By Using promises:
+Promises provide a cleaner and more readable way to handle asynchronous operations. Promises allow you to chain operations and handle errors in a more structured manner
+2.Async/Await:They work on top of promises and provide a more synchronous-like syntax.
+
+3.Modularization :Break down the functionality into smaller, modular functions. Each function can handle a specific asynchronous operation, and the main logic can be composed by calling these functions. 
+
+
+
+
+
+
+
+
+
+
+3.What is the purpose of EventEmitter?
+Answer : The primary purpose of EventEmitter is to allow communication between different parts of a Node.js application by emitting and listening for events.EventEmitter is a core module in Node.js that provides an implementation of the observer pattern. It is used to handle events and build event-driven architectures.
+
+
+4.Write a Node.js program that uses the Express.js framework to create a REST API that allows users to create, read, update, and delete items from a database.
+
+Answer :Please see the MVC concept i have follwed in architecture
+
+5.What is the difference between synchronous and asynchronous programming in Node.js?
+Answer :Asynchronous is a non-blocking architecture, so the execution of one task isn't dependent on another. Tasks can run simultaneously. Synchronous is a blocking architecture, so the execution of each operation depends on completing the one before it

@@ -1,0 +1,14 @@
+
+1.What is the difference between the :before and :after pseudo-elements in CSS?
+Answer:In CSS, the :before and :after pseudo-elements add content to a selected element. The main difference between the two is their position: 
+:before: Inserts content before the content of the selected element.
+:after: Inserts content after the content of the selected element.
+
+2.What is the difference between the :nth-child() and :nth-of-type() selectors in CSS?
+Answer:nth-child() Selector: This selector is used to match the elements based on their position in a group of siblings. It matches every element that is the nth-child, regardless of the type, of its parent.
+
+nth-of-type() Selector: This Selector is used to style only those elements which are the nth number of children of its parent element. Any n may be a number, a keyword, or a formula.children
+
+
+3.Demonstrate your understanding of CSS Grid Layout by solving a complex layout challenge. How does CSS Grid differ from other layout systems, and what are its advantages in creating responsive designs?
+Answer:CSS Grid is a two-dimensional layout system that allows for the alignment of elements in columns and rows. It's similar to tables, but it's more flexible and provides more layout options. CSS Grid also allows items to overlap each other

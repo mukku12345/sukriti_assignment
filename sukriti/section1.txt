@@ -1,0 +1,133 @@
+1.	What is the difference between controlled and uncontrolled components in React?
+Answer. The difference between controlled and uncontrolled components are -
+          controlled component-
+            Controlled components are typically used for form elements that need to be validated, such as text 
+            inputs and select boxes. When a user interacts with a controlled component, React updates the   component's state to reflect the new value. This allows the parent component to access the latest form data and perform validation.
+
+uncontrolled component-
+
+Uncontrolled components are typically used for form elements that do not need to be validated, such as checkboxes and radio buttons. When a user interacts with an uncontrolled component, the component's state does not change. This means that the parent component is responsible for keeping track of the component's state.
+
+
+2.What is the significance of the shouldComponentUpdate() method in React? Explain all lifecycle methods.
+
+Answer. shouldComponentUpdate is a lifecycle method in React that you can define in your class components. It allows you to control whether the component should re-render or not. By default, it returns true, indicating that the component should update. However, you can override this method to implement your own logic for optimizing performance.
+
+Lifecycle Method=>
+1.Mounting
+2.Updating
+3.Unmounting
+4.Error Handling
+
+1.Mounting=>it is the first step of lifecycle which means putting elements in to the DOM.
+
+(i).constructor(props): This is the first method called when a component is created. It's used for initializing state and binding event handlers. It should be called with super(props) before any other statement.
+
+(ii).static getDerivedStateFromProps(props, state): This method is invoked right before calling the render method, both on the initial mount and on subsequent updates. It returns an object to update the state or null to indicate that no state update is necessary.
+
+(iii). render(): This method is responsible for returning the JSX that represents the component's UI. It's a pure function and should not modify component state.
+
+(iv). componentDidMount(): This method is invoked immediately after a component is inserted into the DOM. It's a good place to perform tasks like network requests, subscriptions, or manually changing the DOM.
+
+
+2.Updating=>Updating elements in to the DOM.
+
+(i). static getDerivedStateFromProps(props, state): This method is also called during the updating phase, similar to the mounting phase.
+
+(ii). shouldComponentUpdate(nextProps, nextState): This method is invoked before rendering when new props or state are being received. It allows you to control whether the component should re-render. By default, it returns true.
+
+(iii). render(): Same as in the mounting phase, this method returns the JSX to be rendered.
+
+(iv). getSnapshotBeforeUpdate(prevProps, prevState): This method is called right before the most recently rendered output is committed to the DOM. It enables your component to capture some information from the DOM before it is potentially changed.
+
+(v). componentDidUpdate(prevProps, prevState, snapshot): This method is called after the component is updated in the DOM. It's a good place to perform side effects like network requests based on prop/state changes.
+
+3. Unmounting:deleting element from the  DOM .
+
+componentWillUnmount(): This method is invoked immediately before a component is unmounted and destroyed. It's used for cleanup tasks like canceling network requests or clearing up subscriptions.
+
+4.Error Handling : if in rendering get any any error gives response of error.
+(i). static getDerivedStateFromError(error): This method is called when there is an error during rendering, allowing you to update state in response to the error.
+
+(ii). componentDidCatch(error, info): This method is called after an error has been thrown during rendering. It's used to log the error or send it to a reporting service.
+
+3.What is Redux and how does it work with React?
+Answer: Redux is a state management library for JavaScript applications, commonly used with React to manage the state of a large and complex application in a predictable way. It provides a centralized store to manage the state of the entire application, making it easier to maintain, debug, and test.
+
+IN REDUX:
+Store:
+
+The store is a single JavaScript object that represents the entire state of your application. It is maintained in a central location.
+Actions:
+
+Actions are plain JavaScript objects that describe a change in the state of the application. They have a type field that indicates the type of action and may also contain additional data.
+Reducers:
+
+Reducers are pure functions responsible for handling state transitions based on actions. They take the current state and an action as arguments and return a new state.
+Dispatch:
+
+Dispatch is a function provided by Redux that is used to send actions to the store. When an action is dispatched, it triggers the execution of the corresponding reducer, which updates the state accordingly.
+Middleware:
+
+Middleware provides a third-party extension point between dispatching an action and the moment it reaches the reducer. It can be used for logging, asynchronous operations, and other side effects.
+
+
+Working in React==> First install the  packages "redux" and "react-redux".
+second =>Set up the Redux store by combining reducers using the createStore function.
+third => Wrap your React application with the Provider component from react-redux to make the Redux store available to all components.
+ 
+example=>
+//store.js
+
+import { createStore } from 'redux';
+import rootReducer from './reducers';
+
+const store = createStore(rootReducer);
+
+export default store;
+
+
+//index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import store from './store';
+import App from './App';
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
+
+
+//MyComponent
+
+import React from 'react';
+import { connect } from 'react-redux';
+
+const MyComponent = ({ myData, dispatch }) => {
+  return (
+    <div>
+      <p>{myData}</p>
+      <button onClick={() => dispatch({ type: 'INCREMENT' })}>Increment</button>
+    </div>
+  );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    myData: state.myData,
+  };
+};
+
+export default connect(mapStateToProps)(MyComponent);
+
+
+4.What is the significance of the useEffect() hook in React?
+Answer:It is a type of hook . The useEffect hook is a crucial tool for managing side effects in functional components, and it promotes cleaner and more readable code compared to lifecycle methods in class components.
+Dependencies Array in UseEffect Hook:which is an array of dependencies. The effect will only run if the values in the dependencies array change between renders.if there will empty array the its only render one time .if there is no array then it will render in loop .
+
+5.What is prop drilling and how can you avoid it?
+Answer : Prop drilling is when a parent component passes data down to its children and then those children pass the same data down to their own children.for avoiding this we use context API .
